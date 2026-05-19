@@ -9,16 +9,27 @@ export default function Sec1() {
 
   useEffect(() => {
 
-    const checkScreen = () => {
-      setIsMobile(window.innerWidth <= 1024)
+    const checkDevice = () => {
+
+      const mobileDevice =
+        /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
+
+      const desktopMode =
+        window.innerWidth > 1024
+
+      if (mobileDevice && !desktopMode) {
+        setIsMobile(true)
+      } else {
+        setIsMobile(false)
+      }
     }
 
-    checkScreen()
+    checkDevice()
 
-    window.addEventListener("resize", checkScreen)
+    window.addEventListener("resize", checkDevice)
 
     return () => {
-      window.removeEventListener("resize", checkScreen)
+      window.removeEventListener("resize", checkDevice)
     }
 
   }, [])
@@ -30,7 +41,7 @@ export default function Sec1() {
         <div className={styles.sec1_mb}>
           <div className={styles.content_container}>
             <div className={styles.center_container}>
-              <div>INI MB</div>
+              INI MB
             </div>
           </div>
         </div>
@@ -38,7 +49,7 @@ export default function Sec1() {
         <div className={styles.sec1_pc}>
           <div className={styles.content_container}>
             <div className={styles.center_container}>
-              <div>INI PC</div>
+              INI PC
             </div>
           </div>
         </div>
